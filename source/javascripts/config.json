@@ -1,0 +1,14 @@
+{
+  "localhost": {
+    "zendesk": {
+      "url": "https://support.remotelock.com",
+      "key": ""
+    }
+  },
+  "remotelock.com": {
+    "zendesk": {
+      "url": "https://support.remotelock.com",
+      "key": ""
+    }
+  }
+}
