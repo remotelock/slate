@@ -2,6 +2,7 @@
 //= require ./app/_toc
 //= require ./app/_lang
 //= require ./app/_config
+//= require ./app/_zendesk
 
 $(function() {
   loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
@@ -12,7 +13,8 @@ $(function() {
   });
 
   loadConfig(function(config) {
-    console.log(config);
+    setSupportLink(config.zendesk.url);
+    loadHelpWidget(config.zendesk.key);
   });
 });
 
