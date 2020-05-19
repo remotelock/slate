@@ -1,5 +1,4 @@
 # Rate Limiting
-<br/>
 
 Currently, each **account** is limited to **120 requests/minute**.
 

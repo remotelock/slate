@@ -1,4 +1,6 @@
-# JSON Structure Overview
+# JSON Structure
+
+## Overview
 
 ### JSON request structure
 

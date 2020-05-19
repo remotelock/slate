@@ -1,5 +1,4 @@
 # Sorting
-<br/>
 
 Most endpoints that return a collection are sortable. Additionally, these
 endpoints usually have a default sort attribute.

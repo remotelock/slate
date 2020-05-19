@@ -1,4 +1,4 @@
-## Changelog
+# Changelog
 
 - *2020-03-09*
   - Add `schlage_home_lock` device type and `SchlageEncode` model number
@@ -48,10 +48,13 @@
 
     Statuses for `access_guest` type:
 
-      - `upcoming` - initial status when start time has not met yet
-      - `current` - initial status when start time has already met
-      - `expired` - when end time has already met
-      - `deactivated` - when a user manually deactivates it. See new endpoint below
+      - `upcoming` initial status when start time has not met yet
+
+      - `current` initial status when start time has already met
+
+      - `expired` when end time has already met
+
+      - `deactivated` when a user manually deactivates it. See new endpoint below
 
     <br/>
     Statuses for `access_user` type:

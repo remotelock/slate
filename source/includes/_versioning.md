@@ -1,5 +1,4 @@
-# API versioning
-<br/>
+# Versioning
 
 **Specifying API version**
 

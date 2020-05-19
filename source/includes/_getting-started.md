@@ -1,4 +1,4 @@
-#  Getting Started Tutorial
+#  Getting Started
 
 ## Introduction
 
@@ -134,13 +134,16 @@ next steps.
 
 ## Retrieving the List of Locks
 
-The next step is to retrieve the list of locks in the account so that your user
-can assign them to Rooms/Units in your application. To fetch that list, use the
-following request:
+>To fetch that list, use the following request:
 
+```shell
     curl -H 'Authorization: Bearer $ACCESS_TOKEN' \
       -H 'Accept: application/vnd.lockstate+json; version=1' \
       'https://api.remotelock.com/devices'
+```
+
+The next step is to retrieve the list of locks in the account so that your user
+can assign them to Rooms/Units in your application.
 
 Replacing `$ACCESS_TOKEN` in the authorization header with the value we
 generated in the previous step. Notice how an additional header is required to
@@ -148,15 +151,16 @@ specify the API version we're using. See the
 [API Versioning](https://developer.remotelock.com/api/docs#versioning-section)
 section of the documentation for more details.
 
-The response should look like this:
+>The response should look like this:
 
+```json
     {
        "data":[
           {
              "type":"lock",
              "attributes":{
                 "name":"My Lock",
-                "heartbeat_interval":1200,
+                "heartbeat_interval": 1200,
                 // ...
                 "model_id":"1d99dded-91ce-47ed-90e4-84389e783a92",
                 "location_id":"38e651b3-9944-4539-be3b-13203b61d638"
@@ -175,10 +179,12 @@ The response should look like this:
          // ...
        }
     }
-
+```
+<aside class="notice">
 Note: You can use a tool like
 [JSON Formatter](https://jsonformatter.curiousconcept.com/) or
 [jq](https://stedolan.github.io/jq/) to make the JSON responses easier to read.
+</aside>
 
 In the response, each entry in the `data` array is a Device. The most important
 value we need to consider here is the `id` and `type`, as we will need them to

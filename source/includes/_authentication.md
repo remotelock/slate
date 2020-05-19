@@ -1,5 +1,4 @@
 # Authentication
-<br/>
 
 RemoteLock uses OAuth 2.0 to authenticate users in applications installed in
 mobile devices or running in external servers. The supported OAuth flows:
