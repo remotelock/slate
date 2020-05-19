@@ -2,7 +2,7 @@
 //= require ./app/_toc
 //= require ./app/_lang
 //= require ./app/_config
-//= require ./app/_zendesk
+//= require ./app/_remote-lock
 
 $(function() {
   loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
@@ -13,8 +13,10 @@ $(function() {
   });
 
   loadConfig(function(config) {
-    setSupportLink(config.zendesk.url);
-    loadHelpWidget(config.zendesk.key);
+    setBaseURLLabels(config.apiBaseURL);
+    setOAuthURLLabels(config.oAuthBaseURL);
+    setSupportLink(config.helpLinkURL);
+    loadHelpWidget(config.zendeskWidgetKey);
   });
 });
 

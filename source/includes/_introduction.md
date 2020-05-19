@@ -8,5 +8,5 @@ update, delete and perform other actions via HTTP with objects in JSON represent
 
 ### Production environment
 
-  * OAuth base URL: https://connect.remotelock.com
-  * API base URL: https://api.remotelock.com
+  * OAuth base URL: <span class="oauth-base-url">https://connect.remotelock.com</span>
+  * API base URL: <span class="api-base-url">https://api.remotelock.com</span>

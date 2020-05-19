@@ -1,14 +1,14 @@
 {
   "localhost": {
-    "zendesk": {
-      "url": "https://support.remotelock.com",
-      "key": ""
-    }
+    "apiBaseURL": "https://api.remotelock.com",
+    "oAuthBaseURL": "https://connect.remotelock.com",
+    "helpLinkURL": "https://support.remotelock.com",
+    "zendeskWidgetKey": ""
   },
   "remotelock.com": {
-    "zendesk": {
-      "url": "https://support.remotelock.com",
-      "key": ""
-    }
+    "apiBaseURL": "https://api.remotelock.com",
+    "oAuthBaseURL": "https://connect.remotelock.com",
+    "helpLinkURL": "https://support.remotelock.com",
+    "zendeskWidgetKey": ""
   }
 }

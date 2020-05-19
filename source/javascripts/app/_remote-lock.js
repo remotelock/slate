@@ -1,12 +1,27 @@
+//= require ../lib/_jquery
+
 ;(function () {
   'use strict';
 
+  window.setBaseURLLabels = setBaseURLLabels;
+  window.setOAuthURLLabels = setOAuthURLLabels;
   window.setSupportLink = setSupportLink;
   window.loadHelpWidget = loadHelpWidget;
 
-  function setSupportLink(url) {
-    const supportLink = document.getElementById('support-link');
-    supportLink.setAttribute('href', url);
+  function setBaseURLLabels(apiBaseURL) {
+    $('.api-base-url').each(function(){
+      $(this).text(apiBaseURL);
+    });
+  }
+
+  function setOAuthURLLabels(oAuthURL) {
+    $('.oauth-base-url').each(function(){
+      $(this).text(oAuthURL);
+    });
+  }
+
+  function setSupportLink(helpLinkURL) {
+    $('#support-link').attr('href', helpLinkURL);
   }
 
   function loadHelpWidget(key) {
