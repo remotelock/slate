@@ -1,8 +1,7 @@
 //= require ./lib/_energize
 //= require ./app/_toc
 //= require ./app/_lang
-//= require ./app/_config
-//= require ./app/_remote-lock
+//= require ./app/_remotelock-config
 
 $(function() {
   loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
@@ -12,12 +11,7 @@ $(function() {
     window.refreshToc();
   });
 
-  loadConfig(function(config) {
-    setBaseURLLabels(config.apiBaseURL);
-    setOAuthURLLabels(config.oAuthBaseURL);
-    setSupportLink(config.helpLinkURL);
-    loadHelpWidget(config.zendeskWidgetKey);
-  });
+  loadRemoteLockConfig();
 });
 
 window.onpopstate = function() {
