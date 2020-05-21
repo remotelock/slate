@@ -1,7 +1,7 @@
 //= require ./lib/_energize
 //= require ./app/_toc
 //= require ./app/_lang
-//= require ./app/_remotelock-config
+//= require ./app/_remotelock
 
 $(function() {
   loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
