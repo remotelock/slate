@@ -1,13 +1,12 @@
 ---
-title: API Reference
+title: RemoteLock API V1 Documentation
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - json
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
   - <a id='support-link' href='#'>Support</a>
+  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - introduction
