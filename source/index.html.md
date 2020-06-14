@@ -16,7 +16,7 @@ includes:
   - json-overview
   - json-errors
   - json-pagination
-  - http-status-codes-section
+  - http-status-codes
   - filtering 
   - sorting 
   - versioning 
