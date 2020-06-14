@@ -2,15 +2,19 @@
 
 Collection resources can be paginated using the data from `meta` top level key.
 
-    {
-      "data": { ... },
-      "meta": {
-        "page": 1,
-        "per_page": 2,
-        "total_pages": 7,
-        "total_count": 14
-      }
-    }
+<div class="center-column"></div>
+
+```json
+{
+  "data": { ... },
+  "meta": {
+    "page": 1,
+    "per_page": 2,
+    "total_pages": 7,
+    "total_count": 14
+  }
+}
+```
 
 On every endpoint that responds with a collection of resources, you can provide
 the following query parameters:

@@ -13,32 +13,40 @@ when updating a lock, the response will be a resource error.
 
 Here's the example response when an error happens:
 
-    {
-      "attributes": {
-        "name": "",
-        "age": 10
-      },
-      "errors": [{
-        "attribute": "name",
-        "messages": ["is empty"],
-        "full_messages": ["name is empty"]
-      }]
-    }
+<div class="center-column"></div>
+
+```json
+{
+  "attributes": {
+    "name": "",
+    "age": 10
+  },
+  "errors": [{
+    "attribute": "name",
+    "messages": ["is empty"],
+    "full_messages": ["name is empty"]
+  }]
+}
+```
 
 In case an error is not related to a particular attribute, the errors
 `attribute` value will be `null`.
 
-    {
-      "attributes": {
-        "name": "",
-        "age": 10
-      },
-      "errors": [{
-        "attribute": null,
-        "messages": ["Subuser creation limit reached, please upgrade your account."],
-        "full_messages": ["Subuser creation limit reached, please upgrade your account."]
-      }]
-    }
+<div class="center-column"></div>
+
+```json
+{
+  "attributes": {
+    "name": "",
+    "age": 10
+  },
+  "errors": [{
+    "attribute": null,
+    "messages": ["Subuser creation limit reached, please upgrade your account."],
+    "full_messages": ["Subuser creation limit reached, please upgrade your account."]
+  }]
+}
+```
 
 ### General errors
 
@@ -48,7 +56,11 @@ doesn't have a paid subscription.
 
 Here's the example response:
 
-    {
-      "message": "Please create a subscription",
-      "type": "billing_subscription_required"
-    }
+<div class="center-column"></div>
+
+```json
+{
+  "message": "Please create a subscription",
+  "type": "billing_subscription_required"
+}
+```
