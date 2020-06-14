@@ -20,16 +20,25 @@ mobile devices or running in external servers. The supported OAuth flows:
 
 Once a user is authorized, **every** API request **must** include a valid access token.
 
-**Before proceeding:** pick the OAuth flow that is suitable for your business and skip the flows
-that do not apply to your account in this guide.
+<aside class="warning">
+  <strong>Before proceeding:</strong> pick the OAuth flow that is suitable for your business and skip the flows that do not apply to your account in this guide.
+</aside>
+
+
+
 
 The following OAuth 2.0 endpoints are available under `https://connect.remotelock.com/`.
+
 These are needed for OAuth2 client library you'll be using:
 
-        GET       /oauth/authorize
-        POST      /oauth/token
+<div class="center-column"></div>
 
-### Choose an OAuth2 client library for your language
+```
+GET       /oauth/authorize
+POST      /oauth/token
+```
+
+## Choose an OAuth2 client library for your language
 
 To simplify integration with RemoteLock it is **strongly recommended** to use one of
 the open source OAuth2 client libraries available in your language. The
@@ -42,7 +51,7 @@ couple options. Here are some examples:
 - **Android:** https://github.com/wuman/android-oauth-client
 - **Ruby:** https://github.com/intridea/oauth2
 
-### Setup a new Application
+## Setup a new Application
 
 1. Send an email to [sales@remotelock.com](mailto:sales@remotelock.com)
 requesting API Access for your account.
@@ -62,20 +71,32 @@ Example:
 
 Let your Application settings be:
 
-    Application ID: abc
-    Secret: xyz
-    Callback URL: http://your.server/oauth_callback
+<div class="center-column"></div>
+
+```
+Application ID: abc
+Secret: xyz
+Callback URL: http://your.server/oauth_callback
+```
 
 The **Authorize URL** should be:
 
-    https://connect.remotelock.com/oauth/authorize?client_id=a1b2c3&response_type=code&redirect_uri=http://your.server/oauth_callback
+<div class="center-column"></div>
+
+```
+https://connect.remotelock.com/oauth/authorize?client_id=a1b2c3&response_type=code&redirect_uri=http://your.server/oauth_callback
+```
 
 Your app should load the above URL in a browser and the user will enter credentials
 on it. Once the authentication succeeds, the server will redirect the request to:
 
-    http://your.server/oauth_callback?code=123
+<div class="center-column"></div>
 
-where **123** is the **Authorization Code** that is valid for **10 minutes**, which
+```
+http://your.server/oauth_callback?code=123
+```
+
+Where **123** is the **Authorization Code** that is valid for **10 minutes**, which
 is enough time to your application request the token for the first time. Your
 application must be able to handle this URL in order to capture this code so that
 it can obtain the OAuth Token.
@@ -84,24 +105,32 @@ it can obtain the OAuth Token.
 
 * Make the following POST request to obtain Access and Refresh tokens:
 
-      POST /oauth/token
-      Host: connect.remotelock.com
-      Content-Type: application/x-www-form-urlencoded
+<div class="center-column"></div>
 
-      code=123&
-      client_id=abc&
-      client_secret=xyz&
-      redirect_uri=http://your.server/oauth_callback&
-      grant_type=authorization_code
+```
+POST /oauth/token
+Host: connect.remotelock.com
+Content-Type: application/x-www-form-urlencoded
+
+code=123&
+client_id=abc&
+client_secret=xyz&
+redirect_uri=http://your.server/oauth_callback&
+grant_type=authorization_code
+```
 
 * The response will be a JSON such as:
 
-      {
-        "access_token": "1/4cc3ss-t0k3n",
-        "expires_in": 7200,
-        "token_type": "Bearer",
-        "refresh_token": "1/r3fR3sH-t0k3n"
-      }
+<div class="center-column"></div>
+
+```json
+{
+  "access_token": "1/4cc3ss-t0k3n",
+  "expires_in": 7200,
+  "token_type": "Bearer",
+  "refresh_token": "1/r3fR3sH-t0k3n"
+}
+```
 
 ### 1.3. Refresh Token
 
@@ -111,24 +140,31 @@ response contains a **refresh_token** that can be used to issue a new
 
 * In order to get a new access token, make the following POST request:
 
-      POST /oauth/token
-      Host: connect.remotelock.com
-      Content-Type: application/x-www-form-urlencoded
+<div class="center-column"></div>
 
-      client_id=abc&
-      client_secret=123&
-      refresh_token=1/r3fR3sH-t0k3n&
-      grant_type=refresh_token
+```
+POST /oauth/token
+Host: connect.remotelock.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=abc&
+client_secret=123&
+refresh_token=1/r3fR3sH-t0k3n&
+grant_type=refresh_token
+```
 
 * The response will be a JSON such as:
 
-      {
-        "access_token": "1/N3w-4cc3ss-T0k3n",
-        "expires_in": 7200,
-        "refresh_token": "1/n3w-r3fR3sH-t0k3n"
-        "token_type": "Bearer"
-      }
+<div class="center-column"></div>
 
+```json
+{
+  "access_token": "1/N3w-4cc3ss-T0k3n",
+  "expires_in": 7200,
+  "refresh_token": "1/n3w-r3fR3sH-t0k3n"
+  "token_type": "Bearer"
+}
+```
 
 Your application should store both Access Token and Refresh Token so that it
 can access the user account when the user is offline or the application is
@@ -161,49 +197,69 @@ credentials required are the Application ID and Secret.
 
 Let your Application settings be:
 
-    Application ID: abc
-    Secret: xyz
+<div class="center-column"></div>
+
+```
+Application ID: abc
+Secret: xyz
+```
 
 ### 2.1. Generating an OAuth Token
 
 * Make the following POST request to obtain Access and Refresh tokens:
 
-      POST /oauth/token
-      Host: connect.remotelock.com
-      Content-Type: application/x-www-form-urlencoded
+<div class="center-column"></div>
 
-      client_id=abc&
-      client_secret=xyz&
-      grant_type=client_credentials
+```
+POST /oauth/token
+Host: connect.remotelock.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=abc&
+client_secret=xyz&
+grant_type=client_credentials
+```
 
 * The response will be a JSON such as:
 
-      {
-        "access_token": "1/4cc3ss-t0k3n",
-        "expires_in": 7200,
-        "token_type": "Bearer",
-      }
+<div class="center-column"></div>
+
+```json
+{
+  "access_token": "1/4cc3ss-t0k3n",
+  "expires_in": 7200,
+  "token_type": "Bearer",
+}
+```
 
 Notice that this flow does not include a Refresh Token, meaning that this same request must
 be done when the access token expires.
 
-### Making requests with an OAuth Token
+## Making requests with an OAuth Token
 
 Just make a GET request using a valid access token. Example:
 
-    GET /locations
-    Host: api.remotelock.com
-    Accept: application/vnd.lockstate.v1+json
-    Authorization: Bearer 1/4cc3ss-t0k3n
+<div class="center-column"></div>
 
-### Revoking an OAuth Access Token
+```
+GET /locations
+Host: api.remotelock.com
+Accept: application/vnd.lockstate.v1+json
+Authorization: Bearer 1/4cc3ss-t0k3n
+```
+
+## Revoking an OAuth Access Token
 
 Send the following POST request to immediately revoke a token:
 
-    POST /oauth/revoke
-    Host: connect.remotelock.com
-    Content-Type: application/x-www-form-urlencoded
+<div class="center-column"></div>
 
-    client_id=abc&
-    client_secret=xyz&
-    token=1/4cc3ss-t0k3n
+```
+POST /oauth/revoke
+Host: connect.remotelock.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=abc&
+client_secret=xyz&
+token=1/4cc3ss-t0k3n
+```
