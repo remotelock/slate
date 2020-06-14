@@ -72,14 +72,14 @@ authorize your application to manage their locks, we will use the
 [Authentication Section](https://developer.remotelock.com/api/docs#authentication-section)
 of the documentation for more details on the two types of grants.
 
-> The URL must be formatted as below:
+With your OAuth application created, your users can be redirected to the
+authorization URL to allow your application to access their resources. The URL must be formatted as below:
 
-```curl
+<div class="center-column"></div>
+
+```
 https://connect.remotelock.com/oauth/authorize?client_id=CLIENT_ID&redirect_uri=REDIRECT_URI&response_type=code
 ```
-
-With your OAuth application created, your users can be redirected to the
-authorization URL to allow your application to access their resources.
 
 In the above example, you will be replacing `CLIENT_ID` and `REDIRECT_URI` with
 values from the OAuth Application you just created. If you view your application
@@ -89,26 +89,29 @@ created a separate account to represent a customer, you should go to that URL
 using an incognito / private mode, so you can sign in using that account and not
 your current one.
 
-
-> What you should see is a JSON result like so:
-
-```json
-{"code":"a1b2...d4e5","state":""}
-```
-
 Once you go to this URL, you will either see a sign in page or, if you're
 already logged in, a list of accounts. Unless you have access to shared
 accounts, this list should only have one pre-selected option, so all you need
 to do is click "Authorize". If our Redirect URI was set to a URL on an
 application, that is where we would've been taken now, but since we've used
-`urn:ietf:wg:oauth:2.0:oob`.
+`urn:ietf:wg:oauth:2.0:oob`. What you should see is a JSON result like so:
+
+<div class="center-column"></div>
+
+```json
+{"code":"a1b2...d4e5","state":""}
+```
 
 The value in the `code` attribute is what we call your **authorization code**,
 we'll use it to generate a token to access a user's data.
 
 ### Generating a Token
 
-> Request example:
+
+
+To generate a token, we must send the authorization code in a `POST` request like the following:
+
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -120,9 +123,10 @@ curl -X POST \
   'https://connect.remotelock.com/oauth/token'
 ```
 
-To generate a token, we must send the authorization code in a `POST` request like the following:
+Replacing `$AUTHORIZATION_CODE`, `$CLIENT_ID` and `$CLIENT_SECRET` with their
+respective values. The response should look like the following:
 
-> The response should look like the following:
+<div class="center-column"></div>
 
 ```json
 {
@@ -133,9 +137,6 @@ To generate a token, we must send the authorization code in a `POST` request lik
   "created_at": 1531403248
 }
 ```
-
-Replacing `$AUTHORIZATION_CODE`, `$CLIENT_ID` and `$CLIENT_SECRET` with their
-respective values.
 
 <aside class="notice">
   The access token expires after 2 hours. Once that happens, you should
@@ -150,7 +151,12 @@ next steps.
 
 ## Retrieving the List of Locks
 
-> To fetch that list, use the following request:
+
+
+The next step is to retrieve the list of locks in the account so that your user
+can assign them to Rooms/Units in your application. To fetch that list, use the following request:
+
+<div class="center-column"></div>
 
 ```shell
 curl -H 'Authorization: Bearer $ACCESS_TOKEN' \
@@ -158,16 +164,13 @@ curl -H 'Authorization: Bearer $ACCESS_TOKEN' \
   'https://api.remotelock.com/devices'
 ```
 
-The next step is to retrieve the list of locks in the account so that your user
-can assign them to Rooms/Units in your application.
-
 Replacing `$ACCESS_TOKEN` in the authorization header with the value we
 generated in the previous step. Notice how an additional header is required to
 specify the API version we're using. See the
 [API Versioning](https://developer.remotelock.com/api/docs#versioning-section)
-section of the documentation for more details.
+section of the documentation for more details. The response should look like this:
 
-> The response should look like this:
+<div class="center-column"></div>
 
 ```json
 {
@@ -208,9 +211,11 @@ value we need to consider here is the `id` and `type`, as we will need them to
 assign an **accessible** when granting access, so this is what your application
 should keep track of.
 
-> If you have many devices of different types, or if your application's flow will
+If you have many devices of different types, or if your application's flow will
 only use specific device types, you can use query string parameters on the URL
 to filter down the results, like so:
+
+<div class="center-column"></div>
 
 ```shell
 curl -H 'Authorization: Bearer $ACCESS_TOKEN' \
@@ -218,15 +223,12 @@ curl -H 'Authorization: Bearer $ACCESS_TOKEN' \
   'https://api.remotelock.com/devices?type[]=lock&type[]=zwave_lock&type[]=resort_lock'
 ```
 
-> The above example changes the URL to add a filter on `type`, to return only
+The above example changes the URL to add a filter on `type`, to return only
 `lock`s, `zwave_lock`s and `resort_lock`s. You can check our documentation for
-more information on
-[Filtering](https://developer.remotelock.com/api/docs#filtering-section) and
-[Listing Devices](https://developer.remotelock.com/api/docs#devices-get-all-devices).
+more information on [Filtering](https://developer.remotelock.com/api/docs#filtering-section) and [Listing Devices](https://developer.remotelock.com/api/docs#devices-get-all-devices).
 
 For more information on the JSON structure of requests and responses, refer to
-the
-[JSON Structure](https://developer.remotelock.com/api/docs#json-overview-section)
+the [JSON Structure](https://developer.remotelock.com/api/docs#json-overview-section)
 section of the documentation.
 
 The next section of the tutorial is specific to connected locks, if you need to
@@ -243,7 +245,9 @@ Granting access is done in two steps:
 
 ### Step 1: Create an Access User
 
-> To create an Access User, send the following `POST` request:
+To create an Access User, send the following `POST` request:
+
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -264,7 +268,9 @@ Replacing `$ACCESS_TOKEN` in the authorization header with the value we
 generated in the authentication step. Keep in mind that POST and PUT requests
 require an additional `Content-Type: application/json` header.
 
-> You will get a response that looks like this:
+You will get a response that looks like this:
+
+<div class="center-column"></div>
 
 ```json
 {
@@ -294,7 +300,9 @@ this newly created user access to our lock.
 
 ### Step 2: Grant Access
 
-> To grant access, send the following POST request:
+To grant access, send the following POST request:
+
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -321,7 +329,9 @@ sure you replace that with the one you've got from the previous step.
 For more options and details, refer to the documentation section on
 [granting access](https://developer.remotelock.com/api/docs#access-persons-grant-an-access-person-access).
 
-> The response will look like this:
+The response will look like this:
+
+<div class="center-column"></div>
 
 ```json
 {
@@ -348,8 +358,8 @@ synchronized and usable to lock/unlock your lock.
 
 <aside class="notice">
   This method only works for the Wi-Fi enabled RemoteLocks. If you need to
-  work with the ResortLock algorithmic lock, refer to the <strong>Working with
-  ResortLocks</strong> section below.
+  work with the ResortLock algorithmic lock, refer to the <a href="#getting-started-working-with-resortlocks-optional">Working with
+  ResortLocks</a> section below.
 </aside>
 
 This step is very similar to the previous one. However, in step 1 you'll be
@@ -359,7 +369,9 @@ to set the time period during which that Guest has access.
 
 ### Step 1: Create an Access Guest
 
-> To create an Access Guest, send the following `POST` request:
+To create an Access Guest, send the following `POST` request:
+
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -378,7 +390,13 @@ curl -X POST \
   'https://api.remotelock.com/access_persons'
 ```
 
-> You will get a response that looks like this:
+Replacing `$ACCESS_TOKEN` in the authorization header with the value we
+generated in the authentication step. Feel free to change the `starts_at` and
+`ends_at` values. Notice that the time format on those  do not include a
+timezone. The effective timezone is the one configured at the lock. 
+You will get a response that looks like this:
+
+<div class="center-column"></div>
 
 ```json
 {
@@ -399,11 +417,6 @@ curl -X POST \
 }
 ```
 
-Replacing `$ACCESS_TOKEN` in the authorization header with the value we
-generated in the authentication step. Feel free to change the `starts_at` and
-`ends_at` values. Notice that the time format on those  do not include a
-timezone. The effective timezone is the one configured at the lock.
-
 The most important value in this response is the `id`. We'll be using it,
 together with the lock's `id` and `type` we have from the previous step to grant
 this newly created user access to our lock.
@@ -413,9 +426,9 @@ For more information see the documentation section for
 
 ### Step 2: Grant access
 
-Now all you need to do is grant access using that Access Guest's `id`, just like you did before with the Access User. 
+Now all you need to do is grant access using that Access Guest's `id`, just like you did before with the Access User. To grant access, send the following POST request:
 
-> To grant access, send the following POST request:
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -431,9 +444,9 @@ curl -X POST \
   'https://api.remotelock.com/access_persons/036aa265-d008-4c1a-942d-905e7f2ec3e2/accesses'
 ```
 
-Replacing `$ACCESS_TOKEN` in the authorization header with the value we generated in the authentication step.
+Replacing `$ACCESS_TOKEN` in the authorization header with the value we generated in the authentication step. And the response will look like this:
 
-> And the response will look like this:
+<div class="center-column"></div>
 
 ```json
 {
@@ -470,6 +483,10 @@ with the lock you've selected previously.
 
 ### Create a Webhook Notification Subscriber
 
+The first step is to create a Notification Subscriber. Send the following POST request:
+
+<div class="center-column"></div>
+
 ```shell
 curl -X POST \
   -H 'Authorization: Bearer $ACCESS_TOKEN' \
@@ -488,14 +505,12 @@ curl -X POST \
   'https://api.remotelock.com/notification_subscribers'
 ```
 
-The first step is to create a Notification Subscriber. Send the following POST request:
-
 Where the `url` must be a valid endpoint of your application able to handle this
 request. Make sure you review the requirements, along with a few more options
 for configuring webhooks in the documentation section about
-[creating a webhook notification subscriber](https://developer.remotelock.com/api/docs#notification-subscribers-create-a-webhook-notification-subscriber).
+[creating a webhook notification subscriber](https://developer.remotelock.com/api/docs#notification-subscribers-create-a-webhook-notification-subscriber). The response should look like this:
 
-> The response should look like this:
+<div class="center-column"></div>
 
 ```json
 {
@@ -522,9 +537,9 @@ for configuring webhooks in the documentation section about
 
 With the Subscriber configured, you now can associate it with event types and a
 publisher. In this case we'll create a Notification Subscription for the
-`access_person_synced` event using the lock `id` and `type` as a publisher.
+`access_person_synced` event using the lock `id` and `type` as a publisher. Send the following `POST` request:
 
-> Send the following `POST` request:
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -553,9 +568,9 @@ the `subscriber_id` and `subscriber_type`, values for the webhook subscriber
 created in the previous step. It's worth mentioning that multiple event types
 can be configured, and the publisher can be a broader scope, like a Location or
 even the entire Account. For more details, see the documentation section on
-[creating notification subscriptions](https://developer.remotelock.com/api/docs#notification-subscriptions-create-a-notification-subscription).
+[creating notification subscriptions](https://developer.remotelock.com/api/docs#notification-subscriptions-create-a-notification-subscription). You will get a response similar to the one below:
 
-> You will get a response similar to the one below:
+<div class="center-column"></div>
 
 ```json
 {
@@ -582,7 +597,9 @@ even the entire Account. For more details, see the documentation section on
 }
 ```
 
-> Now, whenever that event happens on that lock, a `POST` request will be sent to the configured URL with a body similar to the one below:
+Now, whenever that event happens on that lock, a `POST` request will be sent to the configured URL with a body similar to the one below:
+
+<div class="center-column"></div>
 
 ```json
 {
@@ -609,6 +626,13 @@ even the entire Account. For more details, see the documentation section on
 
 ## Working with ResortLocks (Optional)
 
+The process for granting access to ResortLocks works differently from Wi-Fi
+connected locks, as they use algorithmic codes instead of synchronizing codes
+over Wi-Fi. If you have a registered ResortLock, the list of devices in the
+response from the `/devices` endpoint should include an object similar to this one in the `data` array:
+
+<div class="center-column"></div>
+
 ```json
 {
   "type": "resort_lock",
@@ -623,12 +647,9 @@ even the entire Account. For more details, see the documentation section on
 }
 ```
 
-The process for granting access to ResortLocks works differently from Wi-Fi
-connected locks, as they use algorithmic codes instead of synchronizing codes
-over Wi-Fi. If you have a registered ResortLock, the list of devices in the
-response from the `/devices` endpoint should include an object similar to this one in the `data` array:
+To create a guest for this ResortLock, send the following `POST` request:
 
-> To create a guest for this ResortLock, send the following `POST` request:
+<div class="center-column"></div>
 
 ```shell
 curl -X POST \
@@ -646,7 +667,7 @@ curl -X POST \
   'https://api.remotelock.com/resort_lock_guests'
 ```
 
-> Replacing `$ACCESS_TOKEN` in the authorization header with the value we
+Replacing `$ACCESS_TOKEN` in the authorization header with the value we
 generated in the authentication step, and the value for `resort_lock_id` with
 the id for your ResortLock. This guest will only have access between the times
 in `starts_at` and `ends_at`, and those should not use minutes or seconds - any
@@ -654,7 +675,9 @@ value here will be converted to 0. Refer to the
 [Resort Lock Guests](https://developer.remotelock.com/api/docs#resort-lock-guests-get-all-resort-lock-guests)
 documentation section for more information.
 
-> The response will look like this:
+The response will look like this:
+
+<div class="center-column"></div>
 
 ```json
 {
@@ -676,5 +699,5 @@ documentation section for more information.
 }
 ```
 
-> The PIN for that guest is the `pin` value in the response. In the above example,
+The PIN for that guest is the `pin` value in the response. In the above example,
 `123456789012`.
