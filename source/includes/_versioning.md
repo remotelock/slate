@@ -1,22 +1,20 @@
 # Versioning
 
-**Specifying API version**
+### Specifying API version
 
 It is strongly recommended to explicitly specify the version. Specifying the
 version can be done:
 
-- in the resource `url`
+- in the resource `url`  
+`https://api.remotelock.com/v1/articles/1`
 
-        https://api.remotelock.com/v1/articles/1
-
-- or via request `Accept` header
-
-        Accept: application/vnd.remotelock.v1+json
+- or via request `Accept` header  
+`Accept: application/vnd.remotelock.v1+json`
 
 If API version is not specified, the application will default to the latest
 version.
 
-**Changes**
+### Changes
 
 API version will increase only if there's a breaking change.
 

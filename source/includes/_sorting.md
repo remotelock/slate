@@ -17,19 +17,16 @@ The default sort order for any attribute is "ascending". In order to get
 
 Examples:
 
-- "ascending" sort order: `?sort=name`
-- "descending" sort order with hyphen: `?sort=-name`
+* "ascending" sort order: `?sort=name`
+* "descending" sort order with hyphen: `?sort=-name`
 
-### Examples:
+### Examples
 
-* Retrieve devices sorted "ascending" by `name` attribute:
-
+* Retrieve devices sorted "ascending" by `name` attribute:  
   `GET https://api.remotelock.com/devices?sort=name`
 
-* Retrieve devices sorted "descending" by `name` attribute:
-
+* Retrieve devices sorted "descending" by `name` attribute:  
   `GET https://api.remotelock.com/devices?sort=-name`
 
-* Retrieve devices sorted "ascending" by `created_at` and "descending" by `name`:
-
+* Retrieve devices sorted "ascending" by `created_at` and "descending" by `name`:  
   `GET https://api.remotelock.com/devices?sort[]=created_at&sort[]=-name`
