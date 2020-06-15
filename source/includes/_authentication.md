@@ -161,7 +161,7 @@ grant_type=refresh_token
 {
   "access_token": "1/N3w-4cc3ss-T0k3n",
   "expires_in": 7200,
-  "refresh_token": "1/n3w-r3fR3sH-t0k3n"
+  "refresh_token": "1/n3w-r3fR3sH-t0k3n",
   "token_type": "Bearer"
 }
 ```

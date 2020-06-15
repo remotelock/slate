@@ -6,7 +6,9 @@ Collection resources can be paginated using the data from `meta` top level key.
 
 ```json
 {
-  "data": { ... },
+  "data": {
+    //...
+  },
   "meta": {
     "page": 1,
     "per_page": 2,

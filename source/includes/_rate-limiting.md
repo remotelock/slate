@@ -25,6 +25,6 @@ and the body will contain following JSON:
 
 ```json
 {
-  message: "Your account has exceeded the rate limit. Check the X-RateLimit-* headers."
+  "message": "Your account has exceeded the rate limit. Check the X-RateLimit-* headers."
 }
 ```
