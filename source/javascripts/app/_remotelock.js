@@ -1,23 +1,23 @@
+//= require ../lib/_findandreplacedomtext
+
 (function () {
   'use strict';
 
   window.loadRemoteLockConfig = function() {
-    setBaseURLLabels();
-    setOAuthURLLabels();
+    const content = document.getElementsByClassName('content')[0];
+    setBaseURLLabels(content);
+    setOAuthURLLabels(content);
+
     setSupportLink();
     loadHelpWidget();
   };
 
-  function setBaseURLLabels() {
-    document.querySelectorAll('.api-base-url').forEach(function(e) {
-      e.innerText = config.apiBaseURL;
-    })
+  function setBaseURLLabels(target) {
+    findAndReplaceDOMText(target, { find: 'api.remotelock.com', replace: config.apiBaseURL })
   }
 
-  function setOAuthURLLabels() {
-    document.querySelectorAll('.oauth-base-url').forEach(function(e) {
-      e.innerText = config.oAuthBaseURL;
-    });
+  function setOAuthURLLabels(target) {
+    findAndReplaceDOMText(target, { find: 'connect.remotelock.com', replace: config.oAuthBaseURL })
   }
 
   function setSupportLink() {

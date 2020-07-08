@@ -2,8 +2,8 @@
   "use strict";
 
   window.config = {
-    apiBaseURL: "https://api.remotelock.com",
-    oAuthBaseURL: "https://connect.remotelock.com",
+    apiBaseURL: "api.remotelock.kke.co.jp",
+    oAuthBaseURL: "connect.remotelock.kke.co.jp",
     helpLinkURL: "https://support.remotelock.com",
     zendeskWidgetKey: ""
   };
